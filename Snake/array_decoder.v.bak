@@ -1,0 +1,96 @@
+module Array_decoder
+(
+	input Clk,
+	input rst,
+	input [7:0] BodyA,
+	input [7:0] BodyB,
+	input [7:0] BodyC,
+	input [7:0] BodyD,
+	input [7:0] BodyE,
+	input [7:0] BodyF,
+	input [7:0] BodyG,
+	input [7:0] BodyH,
+	input [7:0] BodyI,
+	input [7:0] BodyJ,
+	input [7:0] BodyK,
+	input [7:0] BodyL,
+	input [7:0] BodyM,
+	input [7:0] BodyN,
+	input [7:0] BodyO,
+	input [7:0] BodyP,
+	input [7:0] Snake_length,
+	input [7:0] Apple,
+	output reg [15:0] row,
+	output reg [15:0] col
+	);
+
+reg [7:0] counter;
+reg [7:0] select;
+
+always@(posedge Clk)begin
+	if(~rst)begin
+		counter <= 0;
+	end
+	else begin
+		counter <= counter + 1;
+		case(counter)
+			8'd1:select <= BodyA;
+			8'd2:select <= BodyB;
+			8'd3:select <= BodyC;
+			8'd4:select <= BodyD;
+			8'd5:select <= BodyE;
+			8'd6:select <= BodyF;
+			8'd7:select <= BodyG;
+			8'd8:select <= BodyH;
+			8'd9:select <= BodyI;
+			8'd10:select <= BodyJ;
+			8'd11:select <= BodyK;
+			8'd12:select <= BodyL;
+			8'd13:select <= BodyM;
+			8'd14:select <= BodyN;
+			8'd15:select <= BodyO;
+			8'd16:select <= BodyP;
+			8'd17:begin
+				select <= Apple;
+				end
+		endcase
+		case(select[7:4])
+			4'd0:	col <= 16'b0000_0000_0000_0001;
+			4'd1:	col <= 16'b0000_0000_0000_0010;
+			4'd2:	col <= 16'b0000_0000_0000_0100;
+			4'd3:	col <= 16'b0000_0000_0000_1000;
+			4'd4:	col <= 16'b0000_0000_0001_0000;
+			4'd5:	col <= 16'b0000_0000_0010_0000;
+			4'd6:	col <= 16'b0000_0000_0100_0000;
+			4'd7:	col <= 16'b0000_0000_1000_0000;
+			4'd8:	col <= 16'b0000_0001_0000_0000;
+			4'd9:	col <= 16'b0000_0010_0000_0000;
+			4'd10:	col <= 16'b0000_0100_0000_0000;
+			4'd11:	col <= 16'b0000_1000_0000_0000;
+			4'd12:	col <= 16'b0001_0000_0000_0000;
+			4'd13:	col <= 16'b0010_0000_0000_0000;
+			4'd14:	col <= 16'b0100_0000_0000_0000;
+			4'd15:	col <= 16'b1000_0000_0000_0000;
+		endcase
+		case(select[3:0])
+			4'd0:	row <= 16'b0000_0000_0000_0001;
+			4'd1:	row <= 16'b0000_0000_0000_0010;
+			4'd2:	row <= 16'b0000_0000_0000_0100;
+			4'd3:	row <= 16'b0000_0000_0000_1000;
+			4'd4:	row <= 16'b0000_0000_0001_0000;
+			4'd5:	row <= 16'b0000_0000_0010_0000;
+			4'd6:	row <= 16'b0000_0000_0100_0000;
+			4'd7:	row <= 16'b0000_0000_1000_0000;
+			4'd8:	row <= 16'b0000_0001_0000_0000;
+			4'd9:	row <= 16'b0000_0010_0000_0000;
+			4'd10:	row <= 16'b0000_0100_0000_0000;
+			4'd11:	row <= 16'b0000_1000_0000_0000;
+			4'd12:	row <= 16'b0001_0000_0000_0000;
+			4'd13:	row <= 16'b0010_0000_0000_0000;
+			4'd14:	row <= 16'b0100_0000_0000_0000;
+			4'd15:	row <= 16'b1000_0000_0000_0000;
+		endcase
+	end
+end
+endmodule
+
